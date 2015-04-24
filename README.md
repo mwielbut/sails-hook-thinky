@@ -3,6 +3,15 @@ A hook to enable the Thinky ORM for RethinkDB in Sails.
 
 ## Usage
 
+The hook configures the thinky orm and expsoses the thinky instance to the global `thinky`. All model files in the `/api/thinky` directory will be loaded and exposed in the `sails.thinkymodels` and optionally to the global namespace.
+
+Make model calls from any service, controller, policy, etc. just as you would normally. No need to require thinky or any model files.
+
+```javascript
+Post.getJoin().then(function(posts) {
+     console.log(posts);
+ });
+```
 
 ## Configuration
 
