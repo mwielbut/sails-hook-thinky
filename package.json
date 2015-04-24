@@ -1,0 +1,16 @@
+{
+    "name": "sails-hook-thinky",
+    "version": "0.0.1",
+    "description": "A hook to enable the Thinky ORM for RethinkDB in Sails.",
+    "main": "index.js",
+    "author": "mwielbut",
+    "repository":
+    {
+        "type": "git",
+        "url": "git://github.com/mwielbut/sails-hook-thinky.git"
+    },
+    "license": "MIT",
+    "sails": {
+        "isHook": true
+    }
+}
