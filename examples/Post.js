@@ -1,6 +1,3 @@
-"use strict";
-/* global thinky */
-
 /**
  * Post.js
  *
@@ -10,8 +7,7 @@
 
 var type = thinky.type;
 
-var model = thinky.createModel("Post",
-{
+var model = thinky.createModel("Post", {
     'id': type.string(),
     'title': type.string(),
     'content': type.string(),
