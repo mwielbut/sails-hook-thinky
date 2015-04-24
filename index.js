@@ -60,7 +60,6 @@ module.exports = function (sails)
 
         initialize: function (cb)
         {
-            console.log('initialize');
             var thinky = new Thinky(sails.config.thinky.rethinkdb);
 
             // Expose modules on `sails`
