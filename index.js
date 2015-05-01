@@ -1,16 +1,21 @@
 "use strict";
 /* global async, _ */
 
+/**
+ * A hook to enable the Thinky ORM for RethinkDB in Sails. 
+ * Can be configured alongside or as a replacement for Waterline.js
+ *
+ * `thinky` will be exposed as a global variable unless sails.config.globals.thinky is false.
+ * All models loaded from the `thinkymodels` directory will be exposed as global variables unless sails.config.globals.thinkymodels is false.
+ * 
+ */
 
 module.exports = function (sails)
 {
 
     var Thinky = require('thinky');
-    //var type = thinky.type;
     var path = require('path');
     var buildDictionary = require('sails-build-dictionary');
-
-
 
 
     /**
@@ -29,20 +34,9 @@ module.exports = function (sails)
                 thinkymodels: true
             },
 
-            // // Default model properties
-            // models: {
-
-            //   // This default connection (i.e. datasource) for the app
-            //   // will be used for each model unless otherwise specified.
-            //   connection: 'localDiskDb'
-            // },
-
-
-            // Connections to data sources, web services, and external APIs.
-            // Can be attached to models and/or accessed directly.
+            // thinky specific configs
             thinky:
             {
-
                 rethinkdb:
                 {
                     host: "localhost",
@@ -105,15 +99,12 @@ module.exports = function (sails)
                 {
                     _.each(results.thinkyModels, function eachInstantiatedModel(model)
                     {
-                        // Set `sails.models.*` reference to instantiated Collection
-                        // Exposed as `sails.models[modelID]`
+                        // expose sails.thinkymodels[] in a similar fashion to sails.models[]
                         sails.thinkymodels = sails.thinkymodels ||
                         {};
                         sails.thinkymodels[model.globalId] = model;
 
-                        // Create global variable for this model
-                        // (if enabled in `sails.config.globals`)
-                        // Exposed as `[globalId]`
+                        // expose sails thinky models as globals in a similar fashion to waterline models
                         if (sails.config.globals && sails.config.globals.thinkymodels)
                         {
                             global[model.globalId] = model;
