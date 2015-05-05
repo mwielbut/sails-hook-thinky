@@ -1,6 +1,12 @@
 # sails-hook-thinky
 A hook to enable the Thinky ORM for RethinkDB in Sails.
 
+## Installation
+
+`npm install sails-hook-thinky`
+
+or add to `package.json`
+
 ## Usage
 
 The hook configures the thinky orm and expsoses the thinky instance to the global `thinky`. All model files in the `/api/thinky` directory will be loaded automatically and exposed in the `sails.thinkymodels` propery and optionally to the global namespace.
