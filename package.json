@@ -4,8 +4,10 @@
     "description": "A hook to enable the Thinky ORM for RethinkDB in Sails. Can be configured alongside or as a replacement for Waterline.js.",
     "main": "index.js",
     "author": "mwielbut",
-    "repository":
-    {
+    "dependencies": {
+        "sails-build-dictionary": "~0.10.1"
+    },
+    "repository": {
         "type": "git",
         "url": "git://github.com/mwielbut/sails-hook-thinky.git"
     },
