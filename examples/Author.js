@@ -7,10 +7,17 @@
 
 var type = thinky.type;
 
-var model = thinky.createModel("Author", {
-    id: type.string(),
-    sold: type.number(),
-    userId: type.string()
-});
+module.exports = {
 
-module.exports = model;
+    tableName: "Author", // optional
+    schema: {
+        id: type.string(),
+        sold: type.number(),
+        userId: type.string()
+    },
+    options: {},
+
+    // setup an relationships, indexes or function definitions here
+    init: function(model) {}
+
+};

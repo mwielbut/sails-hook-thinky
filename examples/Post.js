@@ -7,15 +7,20 @@
 
 var type = thinky.type;
 
-var model = thinky.createModel("Post", {
-    'id': type.string(),
-    'title': type.string(),
-    'content': type.string(),
-    'idAuthor': type.string()
-});
+module.exports = {
 
-// define joins and indexes normally
-var Author = require('./Author');
-model.belongsTo(Author, "author", "idAuthor", "id");
+    tableName: "Post", // optional
+    schema: {
+        id: type.string(),
+        title: type.string(),
+        content: type.string(),
+        idAuthor: type.string()
+    },
+    options: {},
 
-module.exports = model;
+    // setup an relationships, indexes or function definitions here
+    init: function(model) {
+        model.belongsTo(Author, "author", "idAuthor", "id");
+    }
+
+};

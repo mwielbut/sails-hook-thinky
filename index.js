@@ -85,30 +85,46 @@ module.exports = function (sails)
 
                 bindToSails: ['thinkyModels', function (next, results)
                 {
-                    _.each(results.thinkyModels, function (model)
+                    _.each(results.thinkyModels, function (modelDefinition)
                     {
                         // Add a reference to the Sails app that loaded the module
-                        model.sails = sails;
+                        modelDefinition.sails = sails;
                         // Bind all methods to the module context
-                        _.bindAll(model);
+                        _.bindAll(modelDefinition);
                     });
 
                     return next();
                 }],
-                exposeToNamespace: ['thinkyModels', function (next, results)
+                build: ['bindToSails', function (next, results)
                 {
-                    _.each(results.thinkyModels, function eachInstantiatedModel(model)
+                    _.each(results.thinkyModels, function eachInstantiatedModel(modelDefinition)
                     {
+                        var modelId = modelDefinition.tableName || modelDefinition.globalId;
+                        var model = thinky.createModel(modelId, modelDefinition.schema, modelDefinition.options);
+
                         // expose sails.thinkymodels[] in a similar fashion to sails.models[]
                         sails.thinkymodels = sails.thinkymodels ||
                         {};
-                        sails.thinkymodels[model.globalId] = model;
+                        sails.thinkymodels[modelId] = model;
 
                         // expose sails thinky models as globals in a similar fashion to waterline models
                         if (sails.config.globals && sails.config.globals.thinkymodels)
                         {
-                            global[model.globalId] = model;
+                            global[modelId] = model;
                         }
+                    });
+
+                    return next();
+                }],
+                initialize: ['build', function (next, results)
+                {
+                    // call the init funciton on each def to setup relationships
+                    _.each(results.thinkyModels, function eachInstantiatedModel(modelDefinition)
+                    {
+                        var modelId = modelDefinition.tableName || modelDefinition.globalId;
+                        var model = sails.thinkymodels[modelId]
+
+                        modelDefinition.init(model);
                     });
 
                     return next();
