@@ -9,7 +9,7 @@ or add to `package.json`
 
 ## Usage
 
-The hook configures the thinky orm and expsoses the thinky instance to the global `thinky`. All model files in the `/api/thinky` directory will be loaded automatically and exposed in the `sails.thinkymodels` propery and optionally to the global namespace.
+The hook configures the thinky orm and expsoses the thinky instance to the global `thinky`. All model files in the `/api/thinky` directory will be loaded automatically and exposed in the `sails.thinkymodels` propery and optionally to the global namespace. 
 
 Make model calls from any service, controller, policy, etc. just as you would normally. No need to require thinky or any model files.
 
@@ -18,6 +18,37 @@ Post.getJoin().then(function(posts) {
      console.log(posts);
  });
 ```
+
+## Model file configuration
+
+```javascript
+var type = thinky.type;
+
+module.exports = {
+
+    tableName: "Car", // optional, will use name of file if not present
+    schema: {
+        id: type.string(),
+        type: type.string(),
+        year: type.string(),
+        idOwner: type.string()
+    },
+    options: {},
+
+    // set up any relationships, indexes or function definitions here
+    init: function(model) {
+        model.belongsTo(Person, "owner", "idOwner", "id");
+        
+        model.ensureIndex("type");
+        
+        model.define("isDomestic", function() {
+            return this.type === 'Ford' || this.type === 'GM';
+        });
+    }
+
+};
+```
+*Also see `examples` directory for sample model files.
 
 ## Configuration
 
