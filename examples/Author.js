@@ -17,7 +17,7 @@ module.exports = {
     },
     options: {},
 
-    // setup an relationships, indexes or function definitions here
+    // set up any relationships, indexes or function definitions here
     init: function(model) {}
 
 };
