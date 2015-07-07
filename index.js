@@ -146,7 +146,7 @@ module.exports = function (sails)
                 }
             };
 
-            sails.thinky.r.getPool().drain()
+            sails.thinky.r.getPoolMaster().drain()
                 .catch(cb)
                 .finally(cb);
         }
