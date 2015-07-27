@@ -16,7 +16,7 @@ module.exports = function (sails)
     var Thinky = require('thinky');
     var path = require('path');
     var buildDictionary = require('sails-build-dictionary');
-
+    var _ = require('lodash');
 
     /**
      * Hook definition
