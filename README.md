@@ -72,6 +72,7 @@ module.exports.thinky = {
       authKey: "",
       db: "test"
   },
+  path: "<path to thinky models directory - default is '/api/thinky'>"
     
 };
 ```
