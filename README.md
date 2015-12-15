@@ -56,7 +56,7 @@ module.exports = {
 
 Create a new directory `/api/thinky` (or customize below). This will be where your thinky models files will be auto-loaded by the hook.
 
-Create a new configuration file `thinky.js` in the config directory.
+Create a new configuration file `thinky.js` in the sails app `/config` directory.
 ```javascript
 /**
  * Thinky config
