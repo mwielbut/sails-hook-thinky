@@ -42,7 +42,8 @@ module.exports = function(sails)
                               port: 28015,
                               authKey: "",
                               db: "test"
-                        }
+                        },
+                        path: 'api/thinky' // default path
                   }
             },
 
@@ -68,7 +69,7 @@ module.exports = function(sails)
                                     global.thinky = thinky;
                               }
 
-                              var thinkyDir = path.resolve(sails.config.appPath, 'api/thinky');
+                              var thinkyDir = path.resolve(sails.config.appPath, sails.config.thinky.path);
 
                               buildDictionary.optional(
                               {
