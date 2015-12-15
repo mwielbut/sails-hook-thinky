@@ -54,7 +54,7 @@ module.exports = {
 
 ## Configuration
 
-Create a new directory `/api/thinky`. This will be where your thinky models files will be auto-loaded by the hook.
+Create a new directory `/api/thinky` (or customize below). This will be where your thinky models files will be auto-loaded by the hook.
 
 Create a new configuration file `thinky.js` in the config directory.
 ```javascript
