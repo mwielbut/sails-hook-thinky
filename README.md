@@ -1,8 +1,6 @@
 # sails-hook-thinky
 A hook to enable the Thinky ORM for RethinkDB in Sails.
 
-*Using this in Production would be unwise. It has been lightly tested. Develop at your own risk.*
-
 ## Installation
 
 `npm install sails-hook-thinky`
