@@ -19,40 +19,9 @@ Post.getJoin().then(function(posts) {
  });
 ```
 
-## Model file configuration
-
-```javascript
-var type = thinky.type;
-
-module.exports = {
-
-    tableName: "Car", // optional, will use name of file if not present
-    schema: {
-        id: type.string(),
-        type: type.string(),
-        year: type.string(),
-        idOwner: type.string()
-    },
-    options: {},
-
-    // set up any relationships, indexes or function definitions here
-    init: function(model) {
-        model.belongsTo(Person, "owner", "idOwner", "id");
-        
-        model.ensureIndex("type");
-        
-        model.define("isDomestic", function() {
-            return this.type === 'Ford' || this.type === 'GM';
-        });
-    }
-
-};
-```
-*Also see `examples` directory for sample model files.
-
 ## Configuration
 
-Create a new directory `/api/thinky` (or customize below). This will be where your thinky models files will be auto-loaded by the hook.
+Create a new directory `/api/thinky` in your sails app (or customize - see below). This will be where your thinky model files will be auto-loaded by the hook.
 
 Create a new configuration file `thinky.js` in the sails app `/config` directory.
 ```javascript
@@ -88,3 +57,39 @@ module.exports.thinky = {
   }
 }
 ```
+
+
+
+## Model file configuration  
+Create a file for each thinky model object with the contents below. The hook will scan each model definition and load it on startup.
+
+```javascript
+var type = thinky.type;
+
+module.exports = {
+
+    tableName: "Car", // optional, will use name of file if not present
+    schema: {
+        id: type.string(),
+        type: type.string(),
+        year: type.string(),
+        idOwner: type.string()
+    },
+    options: {},
+
+    // set up any relationships, indexes or function definitions here
+    init: function(model) {
+        model.belongsTo(Person, "owner", "idOwner", "id");
+        
+        model.ensureIndex("type");
+        
+        model.define("isDomestic", function() {
+            return this.type === 'Ford' || this.type === 'GM';
+        });
+    }
+
+};
+```
+*Also see `examples` directory for sample model files.
+
+
