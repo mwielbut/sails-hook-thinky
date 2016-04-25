@@ -104,6 +104,9 @@ module.exports = function(sails)
                         _.each(thinkyModels, function eachInstantiatedModel(modelDefinition)
                         {
                               var modelId = modelDefinition.tableName || modelDefinition.globalId;
+
+                              sails.log.debug("Loading model:", modelId);
+
                               var model = thinky.createModel(modelId, modelDefinition.schema, modelDefinition.options);
 
                               // expose sails.thinkymodels[] in a similar fashion to sails.models[]
